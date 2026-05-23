@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "353019518848",
+    "project_id": "yangosante",
+    "storage_bucket": "yangosante.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353019518848:android:cfea5b607ba27506b7eb65",
+        "android_client_info": {
+          "package_name": "com.yangosante"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR0JdCZmM9MvACGs_XjvbakbPxxkn8Xsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
