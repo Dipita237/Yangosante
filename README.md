@@ -1,2 +1,1 @@
-# YangoSante
-Projet de YangoSanté
+# YangoSanté
