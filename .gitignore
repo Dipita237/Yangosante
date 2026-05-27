@@ -217,3 +217,4 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 >>>>>>> 90a343bfe5e1b637914979250a56ab3b26f9aaa0
+android/app/google-services.json
