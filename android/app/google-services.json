@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "625650702724",
+    "project_id": "yangohealth-c71ef",
+    "storage_bucket": "yangohealth-c71ef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625650702724:android:576d49eb442a03cfcb25d1",
+        "android_client_info": {
+          "package_name": "com.yangohealth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCabjZ2lEbq49FOQzD-tI2t4Bjgjg_9Wqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
