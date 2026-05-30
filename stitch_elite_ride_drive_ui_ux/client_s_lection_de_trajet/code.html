@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#eae8e7",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dcd9d9",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e4e2e1",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "inverse-surface": "#303030",
+                    "on-tertiary-container": "#303233",
+                    "inverse-on-surface": "#f3f0f0",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#ffdbd0",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary": "#ab3500",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#390c00",
+                    "on-surface": "#1b1c1c",
+                    "outline-variant": "#e1bfb5",
+                    "error": "#ba1a1a",
+                    "primary-container": "#ff6b35",
+                    "on-surface-variant": "#594139",
+                    "background": "#fbf9f8",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdbcd",
+                    "secondary": "#875138",
+                    "surface-tint": "#ab3500",
+                    "on-secondary-fixed-variant": "#6b3a23",
+                    "surface-container": "#f0eded",
+                    "surface-bright": "#fbf9f8",
+                    "primary-fixed-dim": "#ffb59d",
+                    "surface": "#fbf9f8",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#5d5f5f",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-container": "#fdb697",
+                    "on-secondary-container": "#79452d",
+                    "surface-container-low": "#f6f3f2",
+                    "on-background": "#1b1c1c",
+                    "on-secondary-fixed": "#351001",
+                    "inverse-primary": "#ffb59d",
+                    "on-primary-container": "#5f1900",
+                    "outline": "#8d7168",
+                    "tertiary-container": "#999a9a",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-primary-fixed-variant": "#832600",
+                    "surface-variant": "#e4e2e1",
+                    "secondary-fixed-dim": "#fdb697"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "bottom-sheet-peek": "120px",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "caption": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(251, 249, 248, 0.8) 0%, rgba(251, 249, 248, 0) 20%, rgba(251, 249, 248, 0) 80%, rgba(251, 249, 248, 1) 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background overflow-hidden">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-14 bg-surface/80 backdrop-blur-md shadow-sm">
+<button class="transition-all duration-200 active:scale-95 text-primary">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary">Select Ride</h1>
+<button class="transition-all duration-200 active:scale-95 text-primary">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative h-screen w-full pt-14 flex flex-col">
+<!-- Map Background -->
+<div class="h-[397px] w-full relative">
+<img class="w-full h-full object-cover" data-alt="A detailed digital map view of a modern urban city with a bold orange route line connecting two points." data-location="Yaoundé" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz6tqF2QLfqJo0uU3hqyZRDDWz-v_DJm31Q3QVCHvg1_0RgtgYQ57Y5g4HFbXzRH4jNymaQId2gNU9X01L9BHUYWUxODQHPOiw-cCTg4gi_yYlwaUjKX15mfcVwUD-ZxkILSKLPlVRtMq3sEdEgBDDZeSHZjH6rg6L0MCUeA4_pj6uQE_L0q7jptbN8glrshuazV8Y-XoUqK-peuGf6MryhoFIcz09n_zwSSLFVfDQnotZeCtJnkLbDPSoIXLBX03OPr2lQqMGd0Yx"/>
+<div class="absolute inset-0 map-gradient-overlay pointer-events-none"></div>
+<!-- Route Summary Floating Card -->
+<div class="absolute top-md left-margin-mobile right-margin-mobile z-10">
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-xl flex flex-col gap-sm">
+<div class="flex items-center gap-md">
+<div class="flex flex-col items-center gap-xs">
+<div class="w-2.5 h-2.5 rounded-full border-2 border-primary"></div>
+<div class="w-0.5 h-4 bg-outline-variant"></div>
+<div class="w-2.5 h-2.5 bg-primary rounded-xs"></div>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<p class="font-label-md text-label-md text-secondary">Pickup</p>
+<p class="font-body-md text-body-md text-on-surface truncate">Ma location actuelle</p>
+<div class="h-[1px] bg-outline-variant my-1"></div>
+<p class="font-label-md text-label-md text-secondary">Destination</p>
+<p class="font-body-md text-body-md text-on-surface truncate">Aéroport International</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet -->
+<div class="flex-1 bg-surface-container-lowest rounded-t-[32px] shadow-2xl z-20 flex flex-col -mt-8 relative border-t border-outline-variant/30">
+<!-- Grabber -->
+<div class="flex justify-center pt-sm pb-xs">
+<div class="w-10 h-1 bg-outline-variant rounded-full"></div>
+</div>
+<div class="px-margin-mobile py-sm flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Choisissez votre trajet</h2>
+<div class="flex gap-xs items-center text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span class="font-label-lg text-label-lg">4-8 min</span>
+</div>
+</div>
+<!-- Ride Categories List -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-margin-mobile space-y-md py-md">
+<!-- Category: Eco -->
+<button class="w-full flex items-center p-md rounded-xl border border-outline-variant hover:bg-surface-variant/20 transition-all duration-200 group active:scale-[0.98]">
+<div class="w-16 h-12 flex items-center justify-center bg-surface-variant rounded-lg overflow-hidden">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="directions_car">directions_car</span>
+</div>
+<div class="flex-1 ml-md text-left">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-on-surface">Eco</span>
+<span class="font-headline-md text-headline-md text-on-surface">1500 XAF</span>
+</div>
+<div class="flex items-center gap-md mt-1 text-secondary">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span>
+<span class="font-label-md text-label-md">4 pers.</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+<span class="font-label-md text-label-md">4 min</span>
+</div>
+</div>
+</div>
+</button>
+<!-- Category: Confort (Selected) -->
+<button class="w-full flex items-center p-md rounded-xl border-2 border-primary bg-primary-container/5 shadow-md relative overflow-hidden active:scale-[0.98] transition-all">
+<div class="absolute top-0 right-0 p-2 text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="w-16 h-12 flex items-center justify-center bg-primary/10 rounded-lg overflow-hidden">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="sensor_door" style="font-variation-settings: 'FILL' 1;">sensor_door</span>
+</div>
+<div class="flex-1 ml-md text-left">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-on-surface">Confort</span>
+<span class="font-headline-md text-headline-md text-on-surface">2500 XAF</span>
+</div>
+<div class="flex items-center gap-md mt-1 text-secondary">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">4 pers.</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+<span class="font-label-md text-label-md">6 min</span>
+</div>
+</div>
+</div>
+</button>
+<!-- Category: VIP -->
+<button class="w-full flex items-center p-md rounded-xl border border-outline-variant hover:bg-surface-variant/20 transition-all duration-200 active:scale-[0.98]">
+<div class="w-16 h-12 flex items-center justify-center bg-inverse-surface rounded-lg overflow-hidden">
+<span class="material-symbols-outlined text-surface-bright text-3xl" data-icon="stars">stars</span>
+</div>
+<div class="flex-1 ml-md text-left">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-on-surface">VIP</span>
+<span class="font-headline-md text-headline-md text-on-surface">5000 XAF</span>
+</div>
+<div class="flex items-center gap-md mt-1 text-secondary">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span>
+<span class="font-label-md text-label-md">3 pers.</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+<span class="font-label-md text-label-md">8 min</span>
+</div>
+</div>
+</div>
+</button>
+<!-- Category: Moto -->
+<button class="w-full flex items-center p-md rounded-xl border border-outline-variant hover:bg-surface-variant/20 transition-all duration-200 active:scale-[0.98]">
+<div class="w-16 h-12 flex items-center justify-center bg-secondary-container/10 rounded-lg overflow-hidden">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="moped">moped</span>
+</div>
+<div class="flex-1 ml-md text-left">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-on-surface">Moto</span>
+<span class="font-headline-md text-headline-md text-on-surface">800 XAF</span>
+</div>
+<div class="flex items-center gap-md mt-1 text-secondary">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span>
+<span class="font-label-md text-label-md">1 pers.</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+<span class="font-label-md text-label-md">2 min</span>
+</div>
+</div>
+</div>
+</button>
+</div>
+<!-- Payment and CTA Section -->
+<div class="p-margin-mobile space-y-md bg-surface-container-lowest border-t border-outline-variant/30">
+<!-- Payment Selector -->
+<button class="w-full flex items-center justify-between p-sm rounded-lg hover:bg-surface-variant/30 transition-colors">
+<div class="flex items-center gap-md">
+<div class="w-10 h-8 flex items-center justify-center bg-surface-variant rounded-md">
+<span class="material-symbols-outlined text-on-surface" data-icon="payments">payments</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface">Espèces</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-label-md text-label-md text-primary">Ajouter promo</span>
+<span class="material-symbols-outlined text-secondary" data-icon="chevron_right">chevron_right</span>
+</div>
+</button>
+<!-- Primary CTA -->
+<button class="w-full h-14 bg-primary-container text-on-primary-container font-headline-md text-headline-md rounded-xl flex items-center justify-center gap-md shadow-lg transition-transform duration-200 active:scale-95">
+                    Commander Confort
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 bg-surface dark:bg-surface-container-lowest pb-safe border-t border-outline-variant/20">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-transform duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-1 transition-transform duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md text-label-md">Activity</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-1 transition-transform duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-md text-label-md">Wallet</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-1 transition-transform duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for category selection
+        const categories = document.querySelectorAll('.overflow-y-auto button');
+        const ctaText = document.querySelector('button.bg-primary-container');
+        
+        categories.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Reset others
+                categories.forEach(b => {
+                    b.classList.remove('border-2', 'border-primary', 'bg-primary-container/5', 'shadow-md');
+                    b.classList.add('border', 'border-outline-variant');
+                    const check = b.querySelector('.material-symbols-outlined[data-icon="check_circle"]');
+                    if(check) check.parentElement.remove();
+                    
+                    // Reset icons color inside button
+                    const icons = b.querySelectorAll('.material-symbols-outlined');
+                    icons.forEach(icon => {
+                        if (icon.getAttribute('data-icon') === 'person') {
+                             icon.style.fontVariationSettings = "'FILL' 0";
+                             icon.parentElement.classList.remove('text-primary');
+                             icon.parentElement.classList.add('text-secondary');
+                        }
+                        if (icon.closest('.w-16')) {
+                             icon.classList.remove('text-primary');
+                             icon.classList.add('text-secondary');
+                             icon.closest('.w-16').classList.remove('bg-primary/10');
+                             icon.closest('.w-16').classList.add('bg-surface-variant');
+                        }
+                    });
+                });
+
+                // Set active
+                btn.classList.add('border-2', 'border-primary', 'bg-primary-container/5', 'shadow-md');
+                btn.classList.remove('border', 'border-outline-variant');
+                
+                // Set icon colors for active
+                const activeIconContainer = btn.querySelector('.w-16');
+                const activeIcon = activeIconContainer.querySelector('.material-symbols-outlined');
+                activeIconContainer.classList.remove('bg-surface-variant');
+                activeIconContainer.classList.add('bg-primary/10');
+                activeIcon.classList.remove('text-secondary');
+                activeIcon.classList.add('text-primary');
+
+                const personInfo = btn.querySelector('.flex.items-center.gap-1:has([data-icon="person"])');
+                if (personInfo) {
+                    personInfo.classList.remove('text-secondary');
+                    personInfo.classList.add('text-primary');
+                    personInfo.querySelector('.material-symbols-outlined').style.fontVariationSettings = "'FILL' 1";
+                }
+
+                // Add checkmark if not present
+                if(!btn.querySelector('[data-icon="check_circle"]')) {
+                    const checkDiv = document.createElement('div');
+                    checkDiv.className = 'absolute top-0 right-0 p-2 text-primary';
+                    checkDiv.innerHTML = '<span class="material-symbols-outlined text-[20px]" data-icon="check_circle" style="font-variation-settings: \'FILL\' 1;">check_circle</span>';
+                    btn.appendChild(checkDiv);
+                }
+
+                // Update CTA
+                const name = btn.querySelector('span.text-on-surface').innerText;
+                ctaText.innerHTML = `Commander ${name} <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>`;
+            });
+        });
+    </script>
+</body></html>

@@ -1,71 +1,195 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { ClientHeader, clientColors, clientStyles } from '../Client/ClientShared';
 
-export default function BookingScreen({ navigation }: any) {
-  const [pickup, setPickup] = useState('');
-  const [destination, setDestination] = useState('');
-  const [loading, setLoading] = useState(false);
+const rideOptions = [
+  { key: 'eco', name: 'Taxi medical', eta: '4 min', price: '2.500 XAF', detail: 'Rapide et economique' },
+  { key: 'comfort', name: 'Confort sante', eta: '6 min', price: '3.200 XAF', detail: 'Vehicule climatise' },
+  { key: 'ambulance', name: 'Ambulance simple', eta: '8 min', price: '4.500 XAF', detail: 'Pour urgence medicale' },
+  { key: 'vip', name: 'Assistance premium', eta: '10 min', price: '6.000 XAF', detail: 'Confort et priorite' },
+];
 
-  const handleBooking = async () => {
-    if (!pickup || !destination) {
-      Alert.alert('Erreur', 'Veuillez remplir le départ et la destination.');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const currentUser = auth().currentUser;
-      
-      const newRide = await firestore().collection('rides').add({
-        clientId: currentUser?.uid || 'anonymous',
-        clientName: currentUser?.displayName || 'Client YangoSanté',
-        pickup: pickup,
-        destination: destination,
-        status: 'en_attente',
-        driverId: null,
-        createdAt: firestore.FieldValue.serverTimestamp(),
-      });
-
-      Alert.alert('Succès', 'Recherche de chauffeur en cours...');
-      navigation.navigate('Tracking', { rideId: newRide.id });
-    } catch (error) {
-      Alert.alert('Erreur Firebase', 'Impossible de créer la course.');
-    } {
-      setLoading(false);
-    }
-  };
+const BookingScreen = ({ navigation }: any) => {
+  const [selected, setSelected] = useState('comfort');
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Commander un transport médical</Text>
-      
-      <TextInput 
-        style={styles.input} 
-        placeholder="Lieu de prise en charge (ex: Melen)" 
-        value={pickup}
-        onChangeText={setPickup}
+    <View style={styles.screen}>
+      <ClientHeader
+        onBack={() => navigation.goBack()}
+        subtitle="Choisis le trajet et le type de vehicule."
+        title="Commander une course"
       />
-      
-      <TextInput 
-        style={styles.input} 
-        placeholder="Hôpital de destination (ex: CHU)" 
-        value={destination}
-        onChangeText={setDestination}
-      />
+      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+        <View style={styles.routeCard}>
+          <Text style={styles.label}>Depart</Text>
+          <TextInput
+            placeholder="Ma position actuelle"
+            placeholderTextColor={clientColors.muted}
+            style={styles.input}
+            value="Ma position actuelle"
+          />
+          <Text style={styles.label}>Destination</Text>
+          <TextInput
+            placeholder="Hopital, quartier, adresse..."
+            placeholderTextColor={clientColors.muted}
+            style={styles.input}
+            value="Hopital Laquintinie, Akwa"
+          />
+        </View>
 
-      <TouchableOpacity style={styles.button} onPress={handleBooking} disabled={loading}>
-        <Text style={styles.buttonText}>{loading ? 'Connexion...' : 'Demander une ambulance'}</Text>
-      </TouchableOpacity>
+        <Text style={styles.sectionTitle}>Choisissez votre trajet</Text>
+        {rideOptions.map(option => {
+          const active = selected === option.key;
+
+          return (
+            <TouchableOpacity
+              activeOpacity={0.88}
+              key={option.key}
+              onPress={() => setSelected(option.key)}
+              style={[styles.optionCard, active && styles.optionCardActive]}>
+              <View style={styles.optionIcon}>
+                <Text style={styles.optionIconText}>+</Text>
+              </View>
+              <View style={styles.optionCopy}>
+                <Text style={styles.optionName}>{option.name}</Text>
+                <Text style={styles.optionDetail}>
+                  {option.eta} - {option.detail}
+                </Text>
+              </View>
+              <Text style={styles.optionPrice}>{option.price}</Text>
+            </TouchableOpacity>
+          );
+        })}
+
+        <View style={styles.paymentCard}>
+          <Text style={styles.paymentTitle}>Paiement</Text>
+          <Text style={styles.paymentMeta}>Cash au chauffeur</Text>
+        </View>
+
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={() => navigation.navigate('ClientSearching')}
+          style={styles.primaryButton}>
+          <Text style={styles.primaryButtonText}>Commander maintenant</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: 'center', backgroundColor: '#fff' },
-  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 30, textAlign: 'center', color: '#E53935' },
-  input: { borderWidth: 1, borderColor: '#ccc', padding: 12, borderRadius: 8, marginBottom: 15, fontSize: 16 },
-  button: { backgroundColor: '#E53935', padding: 15, borderRadius: 8, alignItems: 'center' },
-  buttonText: { color: '#fff', fontSize: 18, fontWeight: 'bold' }
+  content: {
+    padding: 18,
+    paddingBottom: 40,
+  },
+  input: {
+    backgroundColor: clientColors.background,
+    borderColor: clientColors.border,
+    borderRadius: 12,
+    borderWidth: 1,
+    color: clientColors.text,
+    fontSize: 15,
+    fontWeight: '700',
+    marginBottom: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  label: {
+    color: clientColors.muted,
+    fontSize: 12,
+    fontWeight: '900',
+    marginBottom: 6,
+    textTransform: 'uppercase',
+  },
+  optionCard: {
+    ...clientStyles.card,
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 10,
+  },
+  optionCardActive: {
+    borderColor: clientColors.primary,
+    borderWidth: 2,
+  },
+  optionCopy: {
+    flex: 1,
+  },
+  optionDetail: {
+    color: clientColors.muted,
+    fontSize: 13,
+    marginTop: 4,
+  },
+  optionIcon: {
+    alignItems: 'center',
+    backgroundColor: '#FFF0EA',
+    borderRadius: 12,
+    height: 46,
+    justifyContent: 'center',
+    width: 54,
+  },
+  optionIconText: {
+    color: clientColors.primary,
+    fontSize: 26,
+    fontWeight: '900',
+  },
+  optionName: {
+    color: clientColors.text,
+    fontSize: 16,
+    fontWeight: '900',
+  },
+  optionPrice: {
+    color: clientColors.text,
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  paymentCard: {
+    ...clientStyles.card,
+    marginTop: 8,
+  },
+  paymentMeta: {
+    color: clientColors.muted,
+    fontSize: 14,
+    marginTop: 3,
+  },
+  paymentTitle: {
+    color: clientColors.text,
+    fontSize: 16,
+    fontWeight: '900',
+  },
+  primaryButton: {
+    alignItems: 'center',
+    backgroundColor: clientColors.primary,
+    borderRadius: 14,
+    marginTop: 16,
+    paddingVertical: 16,
+  },
+  primaryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '900',
+  },
+  routeCard: {
+    ...clientStyles.card,
+    marginBottom: 20,
+  },
+  screen: {
+    backgroundColor: clientColors.background,
+    flex: 1,
+  },
+  sectionTitle: {
+    color: clientColors.text,
+    fontSize: 20,
+    fontWeight: '900',
+    marginBottom: 12,
+  },
 });
+
+export default BookingScreen;

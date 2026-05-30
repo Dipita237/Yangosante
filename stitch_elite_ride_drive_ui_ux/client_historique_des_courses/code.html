@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#eae8e7",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcd9d9",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#303030",
+                        "on-tertiary-container": "#303233",
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdbd0",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#ab3500",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#390c00",
+                        "on-surface": "#1b1c1c",
+                        "outline-variant": "#e1bfb5",
+                        "error": "#ba1a1a",
+                        "primary-container": "#ff6b35",
+                        "on-surface-variant": "#594139",
+                        "background": "#fbf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#ffdbcd",
+                        "secondary": "#875138",
+                        "surface-tint": "#ab3500",
+                        "on-secondary-fixed-variant": "#6b3a23",
+                        "surface-container": "#f0eded",
+                        "surface-bright": "#fbf9f8",
+                        "primary-fixed-dim": "#ffb59d",
+                        "surface": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#5d5f5f",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-container": "#fdb697",
+                        "on-secondary-container": "#79452d",
+                        "surface-container-low": "#f6f3f2",
+                        "on-background": "#1b1c1c",
+                        "on-secondary-fixed": "#351001",
+                        "inverse-primary": "#ffb59d",
+                        "on-primary-container": "#5f1900",
+                        "outline": "#8d7168",
+                        "tertiary-container": "#999a9a",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed-variant": "#832600",
+                        "surface-variant": "#e4e2e1",
+                        "secondary-fixed-dim": "#fdb697"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "8px",
+                        "margin-mobile": "20px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "bottom-sheet-peek": "120px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "caption": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .trip-card-active:active { transform: scale(0.98); transition: transform 0.1s ease-out; }
+        .custom-scroll-hide::-webkit-scrollbar { display: none; }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-margin-mobile h-14 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex items-center gap-4">
+<button class="p-2 -ml-2 hover:bg-surface-container-low transition-colors rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined text-primary-container" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-primary-container">Historique</h1>
+</div>
+<button class="p-2 hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined text-secondary" data-icon="filter_list">filter_list</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-20 px-margin-mobile">
+<!-- Summary Stats -->
+<div class="grid grid-cols-2 gap-gutter mb-lg">
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/10">
+<p class="text-label-md font-label-md text-secondary uppercase tracking-wider">Ce mois</p>
+<p class="text-headline-md font-headline-md text-on-background mt-1">12 Courses</p>
+</div>
+<div class="bg-primary-container p-md rounded-xl shadow-md">
+<p class="text-label-md font-label-md text-on-primary/80 uppercase tracking-wider">Total dépensé</p>
+<p class="text-headline-md font-headline-md text-on-primary mt-1">45.500 XAF</p>
+</div>
+</div>
+<!-- History List -->
+<div class="space-y-md">
+<!-- Trip Card 1 (Completed) -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/20 trip-card-active transition-all">
+<div class="flex h-32">
+<div class="w-1/3 relative bg-surface-container">
+<img class="w-full h-full object-cover grayscale-[0.5] opacity-80" data-alt="A detailed digital map view of a modern urban street layout in Douala, Cameroon. The map displays clean, minimalist lines for roads and highlights a specific route path in vibrant primary orange. The visual style is premium and corporate, with a high-contrast palette of white and grey tones to emphasize the active trip trajectory." data-location="Douala" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfC4o_YU503tsPfG1Ak8-1vnWJpioSePxONcsPSIaEO18P_gG-MxyKreyCyTa4jIPpFwxlwNkEe-qaTdf3q9u6Z5WTXLLlEAuHIWN_pXFWB1M-GUchYgf249pqOuZeAr6I4ynJgmg9REaVQpHbFjry8IHwlFwLKF-Ujden1hS9r9us-z2Mckku1vhiZuAMpmSQ5OzKH2GnK-akJXI87Xnm6cnYtthTp-AjYIyzFVskwMKy9f0T_8RyzJIcHUWJDUSqSM_iVtyH2wWC"/>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-surface-container-lowest"></div>
+</div>
+<div class="w-2/3 p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-md font-label-md text-secondary">Aujourd'hui, 14:30</p>
+<p class="text-body-md font-body-md font-bold text-on-background">Kinetic Premium</p>
+</div>
+<span class="bg-primary-container/10 text-primary-container text-[10px] font-bold px-2 py-1 rounded-full uppercase">Terminée</span>
+</div>
+<div class="mt-2 space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<p class="text-label-md font-label-md text-secondary truncate">Akwa, Rue Joffre</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<p class="text-label-md font-label-md text-on-background truncate">Bonanjo, Services du Gouverneur</p>
+</div>
+</div>
+</div>
+</div>
+<div class="px-md py-sm bg-surface-container-low flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="person">person</span>
+</div>
+<p class="text-label-md font-label-md text-secondary">Jean-Pierre K.</p>
+</div>
+<p class="text-body-md font-body-md font-bold text-primary-container">3.200 XAF</p>
+</div>
+</div>
+<!-- Trip Card 2 (Cancelled) -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/20 trip-card-active transition-all opacity-80">
+<div class="flex h-32">
+<div class="w-1/3 relative bg-surface-container">
+<img class="w-full h-full object-cover grayscale" data-alt="A minimalist overhead view of a city road network in Yaoundé, Cameroon. The map is stylized with clean lines and soft lighting, featuring a light-mode aesthetic with grey and white tones. A faded orange line suggests a cancelled or incomplete journey path, maintaining a premium and organized visual appearance." data-location="Yaoundé" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC2vPeNzCc0xehO-uA2BxHKtac7yIDZyeqCTKyi7_2JAdLNUieNOmpnpzHl-mvFfilTMYJ-RmEdozLoDrZ_I1vzxT5n9qpbaXP2YCO23Ri4Bm53M8h6rE516OpFA7foo4An8mzVcbP_A8iAcBK6MHGvaW_aQyP6VWlxH6xU3iKtOEqQMlbd16ZuPszZOjQHmo2o6e6n1gVFT89iV255tA4mgu3fYslL27o8c-Ybh9WHO8X9ccHI9mJDd0Wg0O6OhZ6Jk_uBx-O4XyK"/>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-surface-container-lowest"></div>
+</div>
+<div class="w-2/3 p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-md font-label-md text-secondary">Hier, 18:15</p>
+<p class="text-body-md font-body-md font-bold text-on-background">Kinetic Eco</p>
+</div>
+<span class="bg-error/10 text-error text-[10px] font-bold px-2 py-1 rounded-full uppercase">Annulée</span>
+</div>
+<div class="mt-2 space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<p class="text-label-md font-label-md text-secondary truncate">Bastos, Ambassade</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<p class="text-label-md font-label-md text-on-background truncate">Poste Centrale</p>
+</div>
+</div>
+</div>
+</div>
+<div class="px-md py-sm bg-surface-container-low flex justify-between items-center">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[16px]" data-icon="info">info</span>
+<p class="text-label-md font-label-md">Frais d'annulation: 0 XAF</p>
+</div>
+</div>
+</div>
+<!-- Trip Card 3 (Completed) -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/20 trip-card-active transition-all">
+<div class="flex h-32">
+<div class="w-1/3 relative bg-surface-container">
+<img class="w-full h-full object-cover grayscale-[0.5] opacity-80" data-alt="An artistic rendering of a suburban neighborhood map in Bonamoussadi, Cameroon, using a minimalist digital aesthetic. The design features soft drop shadows and high-key lighting to create a clean, modern feel. A vibrant orange route line clearly marks the path of a completed journey against a backdrop of neutral greys and whites." data-location="Bonamoussadi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1QHQieFurbRlUbXtugZcFrLQeUe-LAmcfl3YieqnXrJI4oGnWe2ZTfP2JJTLUWCIFafpQxCKideDf3Ytt_SqNbVPI4qY5nxs6nmy6s_kInwvl71zlIZpAKLtAp_a4fS1Qqk_SDLHC4JrMMA4zXKH4W2SuuhfWYB1M0SMf72UyDcNRbAfouOjUmUUj1KaURD9An07C2PYiX6fyOALCaj5HJlD1cIyAtGshzcqHAEvifqV4IaDye8ShEpBkjuev4vru_C-2EsjveCWd"/>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-surface-container-lowest"></div>
+</div>
+<div class="w-2/3 p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-md font-label-md text-secondary">12 Octobre, 09:00</p>
+<p class="text-body-md font-body-md font-bold text-on-background">Kinetic Premium</p>
+</div>
+<span class="bg-primary-container/10 text-primary-container text-[10px] font-bold px-2 py-1 rounded-full uppercase">Terminée</span>
+</div>
+<div class="mt-2 space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<p class="text-label-md font-label-md text-secondary truncate">Bonamoussadi, Carrefour</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<p class="text-label-md font-label-md text-on-background truncate">Aéroport de Douala</p>
+</div>
+</div>
+</div>
+</div>
+<div class="px-md py-sm bg-surface-container-low flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="person">person</span>
+</div>
+<p class="text-label-md font-label-md text-secondary">Marc A.</p>
+</div>
+<p class="text-body-md font-body-md font-bold text-primary-container">5.500 XAF</p>
+</div>
+</div>
+<!-- More results loader simulation -->
+<div class="flex justify-center py-lg">
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 border-4 border-primary-container/20 border-t-primary-container rounded-full animate-spin"></div>
+<p class="text-caption font-caption text-secondary">Chargement des trajets précédents...</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface shadow-[0_-4px_12px_rgba(0,0,0,0.1)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-secondary opacity-70 hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-label-md font-label-md">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary rounded-full px-4 py-1 scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="history" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="text-label-md font-label-md">Activity</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary opacity-70 hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-md font-label-md">Wallet</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary opacity-70 hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-md font-label-md">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.trip-card-active').forEach(card => {
+            card.addEventListener('click', () => {
+                console.log('Trip details clicked');
+            });
+        });
+
+        // Add active state visual feedback for header buttons
+        document.querySelectorAll('header button').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.classList.add('bg-surface-container-high');
+            });
+            btn.addEventListener('touchend', function() {
+                this.classList.remove('bg-surface-container-high');
+            });
+        });
+    </script>
+</body></html>

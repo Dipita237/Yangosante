@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#eae8e7",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dcd9d9",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e4e2e1",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "inverse-surface": "#303030",
+                    "on-tertiary-container": "#303233",
+                    "inverse-on-surface": "#f3f0f0",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#ffdbd0",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary": "#ab3500",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#390c00",
+                    "on-surface": "#1b1c1c",
+                    "outline-variant": "#e1bfb5",
+                    "error": "#ba1a1a",
+                    "primary-container": "#ff6b35",
+                    "on-surface-variant": "#594139",
+                    "background": "#fbf9f8",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdbcd",
+                    "secondary": "#875138",
+                    "surface-tint": "#ab3500",
+                    "on-secondary-fixed-variant": "#6b3a23",
+                    "surface-container": "#f0eded",
+                    "surface-bright": "#fbf9f8",
+                    "primary-fixed-dim": "#ffb59d",
+                    "surface": "#fbf9f8",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#5d5f5f",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-container": "#fdb697",
+                    "on-secondary-container": "#79452d",
+                    "surface-container-low": "#f6f3f2",
+                    "on-background": "#1b1c1c",
+                    "on-secondary-fixed": "#351001",
+                    "inverse-primary": "#ffb59d",
+                    "on-primary-container": "#5f1900",
+                    "outline": "#8d7168",
+                    "tertiary-container": "#999a9a",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-primary-fixed-variant": "#832600",
+                    "surface-variant": "#e4e2e1",
+                    "secondary-fixed-dim": "#fdb697"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "bottom-sheet-peek": "120px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "unit": "4px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "caption": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-header { backdrop-filter: blur(10px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm h-14 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-md">
+<button class="transition-all duration-200 active:scale-95 text-primary-container">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary-container">Driver Console</h1>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img alt="Driver Profile Photo" class="w-full h-full object-cover" data-alt="A professional headshot of Alex, a male driver with a friendly and reliable expression, set against a clean, neutral background. The lighting is bright and modern, consistent with a high-end corporate mobile application. The overall aesthetic is minimalist and premium, reflecting the kinetic horizon design system with sharp focus and professional color grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm8ELd6cBrKmYwKNr9_f69evAGqCsEuLzcXEgKB9cs7Ma_Z0jBHazyNUDgtxxP1xE6Uc19r707ITpHUIlEK51zPRNOOjesFMkXQX7oIARqSl5IyC8u8jzI59Wyon4UuxGwi5l58aJQgCkyRAPWC1tvtMu3esgoDiBEy1RJo2fv01e_HZOSoeJrJoTRBRA1POYB3nUyeaQMUihAHAmCFIIvw4OG2lJKDyjhzWarvJ4dFqe-Aqe8BKMN5W7YaYWh30xFAa97q5vYYzGB"/>
+</div>
+</header>
+<main class="mt-14 p-margin-mobile space-y-lg">
+<!-- Profile Hero Section -->
+<section class="flex flex-col items-center pt-md">
+<div class="relative">
+<div class="w-24 h-24 rounded-full border-4 border-primary-container p-1 bg-surface-container-lowest shadow-lg">
+<img alt="Driver Profile" class="w-full h-full object-cover rounded-full" data-alt="Close up profile picture of a professional driver with a welcoming smile. The image has a crisp, high-fidelity quality with a soft-focus background of a clean urban environment. The color palette is natural but vivid, emphasizing the warmth and trust required for a premium ride-hailing service driver avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtI7LZFYk3MVaAioI4IEfXPNdJHswZrzVxIn0zrwmavsbhFhHMbZK8DpoJvk_eVWIGqbRlP7HQ8yI0TxAnT7N4julTkBdPrV8O3C9Iq95GKGVgtlIy48n1iN3EMTBgHmiuOkyabE2puGgN3MGvki5XkTbLTOEhWY-XOpb3m5c6ZGfOiH86XRDN-0-HTQq5P8BfF3CnlM70Fp_vVSwa7IZ_2T1h_D-f_WdOjTgBNgpwfnYO1bGqBBNw13NqVXEtEWxJDFR14J27Ptla"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-tertiary-container text-on-tertiary rounded-full p-1 border-2 border-surface shadow-sm">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="text-center mt-md">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Alex</h2>
+<div class="flex items-center justify-center gap-xs text-secondary mt-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg">4.95 Rating</span>
+<span class="text-outline mx-1">•</span>
+<span class="font-label-lg text-label-lg">Gold Tier</span>
+</div>
+</div>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-2 gap-md">
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-surface-variant flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary-container mb-sm">history</span>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">1,250</div>
+<div class="font-label-md text-label-md text-secondary">Total Trips</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-surface-variant flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary-container mb-sm">payments</span>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">$4,820</div>
+<div class="font-label-md text-label-md text-secondary">This Month</div>
+</div>
+</div>
+</section>
+<!-- Vehicle Card -->
+<section class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-surface-variant relative overflow-hidden">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Toyota Corolla</h3>
+<p class="font-body-md text-body-md text-secondary">ABC-1234 • White</p>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-lg font-label-md text-label-md">
+                    Premium
+                </div>
+</div>
+<div class="mt-md flex justify-end">
+<img alt="Toyota Corolla" class="h-20 w-auto object-contain" data-alt="A clean, polished white Toyota Corolla parked on a modern city street with a blurred architectural background. The car is depicted in a high-key lighting environment that emphasizes its sleek lines and cleanliness. The image conveys a professional, well-maintained vehicle standard for a premium ride-hailing service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA77LH1brUxrSi6SNTPWeJsjyziWUR2HLNGvTsVE82EjyosRiVdYD2ZmnlDMnFJEat95TICpC8hF06B7j6HZKmI26CVge49l9WpgFCxP3o5ItZCMlM8yZJQtz9ivTh-zbwuauW3ZgT7rr1jXZ9jOGju1GfQqlCsJrwUdjGKjw_EimNoWyqVox0aySIaHnYpUI-vt83Bg1DNjlkBhJsH3pjYkDDkJp4oNeTOY3694c4znLbQnJwxwgRCHWMLo8wCR_zcU-YAmdKzOFXP"/>
+</div>
+</section>
+<!-- Menu Actions -->
+<section class="space-y-sm">
+<button class="w-full bg-surface-container-lowest px-md py-lg rounded-xl flex items-center justify-between transition-all duration-200 active:scale-95 border border-surface-variant group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">description</span>
+<span class="font-body-lg text-body-lg text-on-surface">Vehicle Documents</span>
+</div>
+<span class="material-symbols-outlined text-primary-container group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full bg-surface-container-lowest px-md py-lg rounded-xl flex items-center justify-between transition-all duration-200 active:scale-95 border border-surface-variant group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+<span class="font-body-lg text-body-lg text-on-surface">Account Settings</span>
+</div>
+<span class="material-symbols-outlined text-primary-container group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full bg-surface-container-lowest px-md py-lg rounded-xl flex items-center justify-between transition-all duration-200 active:scale-95 border border-surface-variant group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">security</span>
+<span class="font-body-lg text-body-lg text-on-surface">Privacy &amp; Security</span>
+</div>
+<span class="material-symbols-outlined text-primary-container group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<div class="pt-md">
+<button class="w-full bg-surface-container-lowest px-md py-lg rounded-xl flex items-center gap-md transition-all duration-200 active:scale-95 border border-error/20 text-error">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-lg text-body-lg font-bold">Log Out</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-4 pt-2 bg-surface dark:bg-surface-container-lowest shadow-[0_-4px_12px_rgba(0,0,0,0.1)] z-50 rounded-t-xl">
+<button class="transition-transform duration-200 ease-out active:scale-90 flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="font-label-md text-label-md">Home</span>
+</button>
+<button class="transition-transform duration-200 ease-out active:scale-90 flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md">Earnings</span>
+</button>
+<button class="transition-transform duration-200 ease-out active:scale-90 flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-label-md text-label-md">Rating</span>
+</button>
+<!-- Active Tab: Account -->
+<button class="transition-transform duration-200 ease-out active:scale-90 flex flex-col items-center justify-center text-primary-container dark:text-primary-fixed-dim bg-primary-container/10 dark:bg-primary-fixed-dim/10 rounded-xl px-4 py-1">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</button>
+</nav>
+<script>
+        // Simple logic for ripple-like active states
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Potential for adding subtle haptic-like animation feedback
+            });
+        });
+    </script>
+</body></html>

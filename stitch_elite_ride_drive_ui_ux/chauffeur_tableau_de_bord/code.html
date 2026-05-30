@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>RapidRide Driver Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#eae8e7",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dcd9d9",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e4e2e1",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "inverse-surface": "#303030",
+                    "on-tertiary-container": "#303233",
+                    "inverse-on-surface": "#f3f0f0",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#ffdbd0",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary": "#ab3500",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#390c00",
+                    "on-surface": "#1b1c1c",
+                    "outline-variant": "#e1bfb5",
+                    "error": "#ba1a1a",
+                    "primary-container": "#ff6b35",
+                    "on-surface-variant": "#594139",
+                    "background": "#fbf9f8",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdbcd",
+                    "secondary": "#875138",
+                    "surface-tint": "#ab3500",
+                    "on-secondary-fixed-variant": "#6b3a23",
+                    "surface-container": "#f0eded",
+                    "surface-bright": "#fbf9f8",
+                    "primary-fixed-dim": "#ffb59d",
+                    "surface": "#fbf9f8",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#5d5f5f",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-container": "#fdb697",
+                    "on-secondary-container": "#79452d",
+                    "surface-container-low": "#f6f3f2",
+                    "on-background": "#1b1c1c",
+                    "on-secondary-fixed": "#351001",
+                    "inverse-primary": "#ffb59d",
+                    "on-primary-container": "#5f1900",
+                    "outline": "#8d7168",
+                    "tertiary-container": "#999a9a",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-primary-fixed-variant": "#832600",
+                    "surface-variant": "#e4e2e1",
+                    "secondary-fixed-dim": "#fdb697"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "unit": "4px",
+                    "md": "16px",
+                    "bottom-sheet-peek": "120px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "caption": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .heat-map-overlay {
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, rgba(255, 107, 53, 0) 70%);
+        }
+        .status-pill-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface overflow-hidden">
+<!-- Top Navigation Bar (Fixed) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img alt="Alex Johnson" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2pwUlhVxsV6bO9TX9LGoVrJ6GAlxZgZSLz9_rlnmVONYoKMAelymxCxv5nCOvJ13yxoWM1wZU0k4-Aa4Ix8cIaRLDOpObpQmgInYU9nmQPBV1M0fotR3TJsAYjEQAw08BDqT4T9qsa20VyYcvklxbi-WOldaaTfpfTPemTzE5qByzDeSZkB_THAxsEDWw0RNKChDrvHhexNVvJSzz3ukuVr7SiaG6I4Cs81m3RxpeUPpGB0iQKxZLTcSHZKR6_mkaY-_XMA0kqUra"/>
+</div>
+<span class="text-headline-md font-headline-md text-primary-container font-bold">RapidRide</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas (Map First Layer) -->
+<main class="relative h-screen w-full pt-16 pb-20">
+<!-- Interactive Map Background -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-surface-container-high relative overflow-hidden" data-location="Douala, Cameroon">
+<img alt="City Map" class="w-full h-full object-cover opacity-60 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVaoH7mIIuBY1eLfwJpS7jaGh3lsqOo4PVfNANOANv_daFyJiF0yQailZhb3AKQZw9MEsNvdbbJotTggbt7l4F-pJSqIgakoMoqkOi3XcZQB_iqTWo9rrbYM9pbad8sRTCQewQWto-MwbQyekO3hIl28RI-4kqyr8J92x0XFQO1_7zWTboGpZ4Ogp7EzEHU4zbK5DaVjMwvWkF_jQOAqwvRktvoUZvakYAT_wnLYpbz8gVGkEI8VLC5o50jT0x_aY19ABlVhq4j39R"/>
+<!-- Floating Map Overlays (Heat Map Zones) -->
+<div class="absolute top-1/3 left-1/4 w-48 h-48 heat-map-overlay rounded-full animate-pulse"></div>
+<div class="absolute bottom-1/3 right-1/4 w-64 h-64 heat-map-overlay rounded-full animate-pulse" style="animation-delay: 1s"></div>
+<!-- Driver Position Marker -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-12 h-12 bg-primary-container/20 rounded-full animate-ping"></div>
+<div class="w-6 h-6 bg-primary-container rounded-full border-2 border-white shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-white" style="font-variation-settings: 'FILL' 1;">navigation</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating UI Elements -->
+<div class="relative z-10 h-full flex flex-col px-margin-mobile pointer-events-none">
+<!-- Top Status Toggle -->
+<div class="mt-4 flex justify-center pointer-events-auto">
+<div class="bg-surface glass-panel rounded-full p-1.5 shadow-lg flex items-center gap-1 border border-outline-variant/30 status-pill-transition" id="status-container">
+<button class="px-6 py-2.5 rounded-full text-label-lg font-label-lg transition-all duration-300 bg-surface-container text-on-surface-variant" id="toggle-offline" onclick="setStatus('offline')">
+                        Hors ligne
+                    </button>
+<button class="px-6 py-2.5 rounded-full text-label-lg font-label-lg transition-all duration-300 bg-primary-container text-white shadow-md" id="toggle-online" onclick="setStatus('online')">
+                        En ligne
+                    </button>
+</div>
+</div>
+<!-- Dashboard Metric Cards (Bento Style Grid) -->
+<div class="mt-4 grid grid-cols-2 gap-3 pointer-events-auto">
+<div class="col-span-2 glass-panel p-4 rounded-xl shadow-md border border-outline-variant/20">
+<div class="flex justify-between items-center mb-1">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Revenus du jour</span>
+<span class="material-symbols-outlined text-primary-container text-lg">payments</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-display-lg font-display-lg text-on-surface">12.450</span>
+<span class="text-label-lg font-label-lg text-on-surface-variant">XAF</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl shadow-md border border-outline-variant/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary-container text-lg">route</span>
+<span class="text-label-md font-label-md text-on-surface-variant">Courses</span>
+</div>
+<span class="text-headline-lg font-headline-lg text-on-surface">14</span>
+</div>
+<div class="glass-panel p-4 rounded-xl shadow-md border border-outline-variant/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary-container text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-label-md text-on-surface-variant">Note</span>
+</div>
+<span class="text-headline-lg font-headline-lg text-on-surface">4.92</span>
+</div>
+</div>
+<!-- Spacer for Map visibility -->
+<div class="flex-grow"></div>
+<!-- Demand Alert / Context Card -->
+<div class="mb-4 pointer-events-auto">
+<div class="bg-secondary-container text-on-secondary-container p-4 rounded-xl shadow-lg border-l-4 border-primary-container animate-bounce">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl">local_fire_department</span>
+<div>
+<p class="text-label-lg font-label-lg font-bold">Forte demande à Akwa</p>
+<p class="text-body-md font-body-md opacity-90">Multiplicateur x1.2 activé dans cette zone.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface border-t border-outline-variant rounded-t-xl shadow-lg">
+<button class="nav-item flex flex-col items-center justify-center bg-primary-container text-white rounded-full px-5 py-1 active:scale-90 duration-200 ease-out" onclick="navTo('home')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-md font-label-md mt-0.5">Accueil</span>
+</button>
+<button class="nav-item flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-all" onclick="navTo('activity')">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-label-md font-label-md mt-0.5">Revenus</span>
+</button>
+<button class="nav-item flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-all" onclick="navTo('wallet')">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-label-md font-label-md mt-0.5">Wallet</span>
+</button>
+<button class="nav-item flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-all" onclick="navTo('account')">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md font-label-md mt-0.5">Profil</span>
+</button>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-surface glass-panel rounded-full shadow-xl flex items-center justify-center border border-outline-variant/30 text-primary-container active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</button>
+<script>
+        function setStatus(status) {
+            const onlineBtn = document.getElementById('toggle-online');
+            const offlineBtn = document.getElementById('toggle-offline');
+            const container = document.getElementById('status-container');
+
+            if (status === 'online') {
+                onlineBtn.className = "px-6 py-2.5 rounded-full text-label-lg font-label-lg transition-all duration-300 bg-primary-container text-white shadow-md";
+                offlineBtn.className = "px-6 py-2.5 rounded-full text-label-lg font-label-lg transition-all duration-300 bg-surface-container text-on-surface-variant";
+                container.style.borderColor = "rgba(255, 107, 53, 0.2)";
+            } else {
+                offlineBtn.className = "px-6 py-2.5 rounded-full text-label-lg font-label-lg transition-all duration-300 bg-secondary text-white shadow-md";
+                onlineBtn.className = "px-6 py-2.5 rounded-full text-label-lg font-label-lg transition-all duration-300 bg-surface-container text-on-surface-variant";
+                container.style.borderColor = "rgba(0, 0, 0, 0.1)";
+            }
+        }
+
+        function navTo(target) {
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(item => {
+                item.className = "nav-item flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-all";
+                const icon = item.querySelector('.material-symbols-outlined');
+                icon.style.fontVariationSettings = "'FILL' 0";
+            });
+
+            const activeMap = {
+                'home': 0,
+                'activity': 1,
+                'wallet': 2,
+                'account': 3
+            };
+            
+            const activeItem = items[activeMap[target]];
+            activeItem.className = "nav-item flex flex-col items-center justify-center bg-primary-container text-white rounded-full px-5 py-1 active:scale-90 duration-200 ease-out";
+            const activeIcon = activeItem.querySelector('.material-symbols-outlined');
+            activeIcon.style.fontVariationSettings = "'FILL' 1";
+        }
+    </script>
+</body></html>

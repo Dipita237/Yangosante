@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>RapidRide - Ride in Progress</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#eae8e7",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dcd9d9",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e4e2e1",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "inverse-surface": "#303030",
+                    "on-tertiary-container": "#303233",
+                    "inverse-on-surface": "#f3f0f0",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#ffdbd0",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary": "#ff6b35",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#390c00",
+                    "on-surface": "#1b1c1c",
+                    "outline-variant": "#e1bfb5",
+                    "error": "#ba1a1a",
+                    "primary-container": "#ff6b35",
+                    "on-surface-variant": "#594139",
+                    "background": "#fbf9f8",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdbcd",
+                    "secondary": "#875138",
+                    "surface-tint": "#ff6b35",
+                    "on-secondary-fixed-variant": "#6b3a23",
+                    "surface-container": "#f0eded",
+                    "surface-bright": "#fbf9f8",
+                    "primary-fixed-dim": "#ffb59d",
+                    "surface": "#fbf9f8",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#5d5f5f",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-container": "#fdb697",
+                    "on-secondary-container": "#79452d",
+                    "surface-container-low": "#f6f3f2",
+                    "on-background": "#1b1c1c",
+                    "on-secondary-fixed": "#351001",
+                    "inverse-primary": "#ffb59d",
+                    "on-primary-container": "#5f1900",
+                    "outline": "#8d7168",
+                    "tertiary-container": "#999a9a",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-primary-fixed-variant": "#832600",
+                    "surface-variant": "#e4e2e1",
+                    "secondary-fixed-dim": "#fdb697"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "unit": "4px",
+                    "md": "16px",
+                    "bottom-sheet-peek": "120px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "caption": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-layer {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+        .bottom-sheet-transition {
+            transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        .progress-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background h-screen overflow-hidden select-none">
+<!-- Top App Bar (Shared Component Strategy) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/10">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional close-up studio portrait of a young man with a friendly expression. He is photographed in a high-key setting with soft, even lighting that emphasizes clean skin and professional grooming. The background is a minimalist, light grey studio wall. The overall aesthetic is modern, high-end corporate, and trustworthy, fitting a premium ride-hailing app's user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7mqx5N38NciciB4boMhHxJwTd3KWcwyFD8COv8IQccdn7VyeIfyefrFklIvwj8baq0ulFUq09SQ1aqFamSxDwdxc26gJV02lCKOp0qO1V6FwZzMiEXFR0BEbYMtBQbylN9RWHmIuZpXVoTg_ktTrxOUPCjlUpLF4GE0SFho3JF_2C7lLKvnVRUGOnugwlVHIvqMQl236WojqDs5MbSXJnJpI7wVghrCzf1KGZZKYARGWwT-TxA9dl80tz-_HUZYQ-6Y_lhElV_9Yi"/>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">RapidRide</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</header>
+<!-- Main Map Interface -->
+<main class="relative h-full w-full">
+<!-- Map Canvas (Lower Layer) -->
+<div class="absolute inset-0 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover opacity-90 map-layer" data-alt="A sophisticated digital map visualization of a bustling city center at dusk. The map features clean, minimalist lines with a high-contrast aesthetic: dark grey streets against a light silver terrain. Glowing orange lines trace the optimal driving route, punctuated by vibrant primary orange markers for the vehicle and destination. The lighting is cinematic, with a soft ambient glow that highlights the fluid movement of traffic in a premium, modern African urban setting." data-location="Nairobi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRIFtpkRuwADCmfi9_JLmm-Wy_qH8HsodOGPo41bZ_R6l-xyDahil2BgK07XlyquaVsy8balBO7I_TI033Wtt5-pSaWhtrpkirBcjhpyVLKVDI_xzT08_dpszO71wWQEr3U8X-x1O8p8ZNICBrXByllcCIvZQ0fL5ZjqifC9fmUEOuDeWcEIVZMI4tjHL2qaILFkC_2fOnjuvWObIruqg1PDL9su-5B_QfXAJV65UB2lbZ2BP-ZS6bRhP9TC-3oDHZQvuGOVI02ajj"/>
+<!-- Floating Map UI Elements -->
+<div class="absolute top-24 left-margin-mobile right-margin-mobile flex flex-col gap-3">
+<!-- Trip ETA Pill -->
+<div class="self-center bg-surface px-6 py-3 rounded-full shadow-lg flex items-center gap-3 animate-bounce-subtle">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-label-lg font-label-lg text-on-surface">Arriving in <span class="font-bold">12 mins</span></span>
+</div>
+</div>
+<!-- SOS Floating Button -->
+<button class="absolute bottom-[360px] right-margin-mobile w-14 h-14 bg-error text-on-error rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined font-bold">shield_with_heart</span>
+</button>
+</div>
+<!-- Interactive Bottom Sheet -->
+<section class="fixed bottom-0 left-0 w-full bg-surface shadow-[0_-10px_30px_rgba(0,0,0,0.1)] rounded-t-[32px] bottom-sheet-transition z-50" id="bottomSheet">
+<!-- Grabber Handle -->
+<div class="w-full flex justify-center py-4 cursor-grab active:cursor-grabbing" id="sheetHandle">
+<div class="w-10 h-1 rounded-full bg-outline-variant"></div>
+</div>
+<div class="px-margin-mobile pb-10">
+<!-- Driver & Vehicle Info -->
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-primary/20">
+<img alt="Driver Moussa" class="w-full h-full object-cover" data-alt="A warm, professional portrait of a male driver named Moussa in his late 30s. He is wearing a clean, crisp polo shirt and looking directly at the camera with a confident, welcoming smile. The lighting is natural and bright, captured during golden hour, evoking reliability and friendliness. The background shows a hint of a modern vehicle interior, maintaining a high-quality, premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAdCRGDEt79fWiwcQ4t1dNy2hc5Yc-za6ha3WVN5SKpiuG7VQSX4AWI4fJkmC20Woh3MGBiC47j4Ky9n_8iZTxwCyw35Vw9_i5_S6u2_npdw14C9v6LJOWWF9AW_p08hfHj4aEgo57lizgLh2OpCHUP7ZwrtP6LWMli0ieg0nVYBUNBXNloac1n665aH7yaxfSe2MmfVQIaEz2WrH8BCvhxrC-nrwQaGI0YUgt8yimJW7bVs4DVwI-dm3z-lofK9K463bMtGn-7XJb"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-surface border border-outline-variant px-2 py-0.5 rounded-lg flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-label-md font-bold">4.9</span>
+</div>
+</div>
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Moussa</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Toyota Corolla • <span class="font-bold tracking-wider">ABC-1234</span></p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary/5 transition-colors active:scale-95">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary/5 transition-colors active:scale-95">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</div>
+</div>
+<!-- Progress Section -->
+<div class="bg-surface-container-low rounded-2xl p-4 mb-6 border border-outline-variant/30">
+<div class="flex justify-between items-center mb-3">
+<span class="text-label-lg font-label-lg text-on-surface-variant uppercase tracking-widest">Route Progress</span>
+<span class="text-label-lg font-label-lg text-primary font-bold">65% Complete</span>
+</div>
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden relative">
+<div class="absolute top-0 left-0 h-full w-[65%] bg-primary rounded-full progress-shimmer"></div>
+</div>
+<div class="flex justify-between mt-3 text-caption font-caption text-on-secondary-container">
+<span>Current Location</span>
+<span>Destination</span>
+</div>
+</div>
+<!-- Trip Details Grid -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high/50 p-4 rounded-xl border border-transparent hover:border-primary/20 transition-all">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-[20px]">schedule</span>
+<span class="text-label-md font-label-md text-on-surface-variant">ETA</span>
+</div>
+<p class="text-headline-md font-headline-md text-on-surface">14:45</p>
+</div>
+<div class="bg-surface-container-high/50 p-4 rounded-xl border border-transparent hover:border-primary/20 transition-all">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-[20px]">account_balance_wallet</span>
+<span class="text-label-md font-label-md text-on-surface-variant">Trip Fare</span>
+</div>
+<p class="text-headline-md font-headline-md text-on-surface">KSh 850</p>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full h-14 bg-surface-variant text-on-surface-variant font-bold rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+<span>Safety Options</span>
+<span class="material-symbols-outlined">security</span>
+</button>
+</div>
+</section>
+</main>
+<script>
+    // Micro-interaction for the bottom sheet
+    const sheet = document.getElementById('bottomSheet');
+    const handle = document.getElementById('sheetHandle');
+    let isExpanded = false;
+
+    handle.addEventListener('click', () => {
+        if (isExpanded) {
+            sheet.style.transform = 'translateY(180px)'; // Peek state
+        } else {
+            sheet.style.transform = 'translateY(0)'; // Expanded state
+        }
+        isExpanded = !isExpanded;
+    });
+
+    // Initialize at semi-peek state
+    window.onload = () => {
+        sheet.style.transform = 'translateY(0px)';
+        
+        // Atmospheric effect: Subtle map panning simulation
+        const mapImg = document.querySelector('.map-layer');
+        let offset = 0;
+        setInterval(() => {
+            offset += 0.05;
+            mapImg.style.transform = `scale(1.1) translate(${Math.sin(offset) * 5}px, ${Math.cos(offset) * 5}px)`;
+        }, 50);
+    };
+
+    // Handle gestures (Simplified)
+    let startY = 0;
+    handle.addEventListener('touchstart', e => { startY = e.touches[0].clientY; });
+    handle.addEventListener('touchend', e => {
+        const endY = e.changedTouches[0].clientY;
+        if (startY - endY > 50) {
+            sheet.style.transform = 'translateY(0)';
+            isExpanded = true;
+        } else if (endY - startY > 50) {
+            sheet.style.transform = 'translateY(180px)';
+            isExpanded = false;
+        }
+    });
+</script>
+</body></html>

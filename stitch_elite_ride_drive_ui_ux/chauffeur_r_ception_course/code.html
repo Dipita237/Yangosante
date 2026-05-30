@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RapidRide Driver - Incoming Request</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#eae8e7",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcd9d9",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#303030",
+                        "on-tertiary-container": "#303233",
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdbd0",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#FF6B35",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#390c00",
+                        "on-surface": "#1b1c1c",
+                        "outline-variant": "#e1bfb5",
+                        "error": "#ba1a1a",
+                        "primary-container": "#ff6b35",
+                        "on-surface-variant": "#594139",
+                        "background": "#fbf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#ffdbcd",
+                        "secondary": "#875138",
+                        "surface-tint": "#FF6B35",
+                        "on-secondary-fixed-variant": "#6b3a23",
+                        "surface-container": "#f0eded",
+                        "surface-bright": "#fbf9f8",
+                        "primary-fixed-dim": "#ffb59d",
+                        "surface": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#5d5f5f",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-container": "#fdb697",
+                        "on-secondary-container": "#79452d",
+                        "surface-container-low": "#f6f3f2",
+                        "on-background": "#1b1c1c",
+                        "on-secondary-fixed": "#351001",
+                        "inverse-primary": "#ffb59d",
+                        "on-primary-container": "#5f1900",
+                        "outline": "#8d7168",
+                        "tertiary-container": "#999a9a",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed-variant": "#832600",
+                        "surface-variant": "#e4e2e1",
+                        "secondary-fixed-dim": "#fdb697"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "md": "16px",
+                        "margin-desktop": "32px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "caption": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .countdown-circle {
+            transform: rotate(-90deg);
+        }
+        .timer-path {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.5); opacity: 0.2; }
+            100% { transform: scale(1); opacity: 0.1; }
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img alt="User profile photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY_ZLBj7gziOuRvTufH_1CfnJAf8iFFwEvwaeDW52uwFS9C4VgZDuCDI_X7fb4P1L8ZC9HJi-HwWeFCSQCj2LQgKOb3vc_lYhSTOgTgneS3hurv588IFEEtAiDSExEvBenKrjvkOd1vfYjq6t4Oq2PMz9zvAe15OlDhdnfxaNV2IdtYxb6TFe7uE4OE5tgijx_axjWH9LFQxJHtISB1yGMkBNqCPNk0XeVQJDeG3266iC_wAHj5Cpr2MMZUDPWrPxJ_cWuOdoovmIc"/>
+</div>
+<span class="text-headline-lg font-headline-lg font-bold text-primary">RapidRide</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</header>
+<!-- Map Foundation Layer -->
+<main class="relative h-screen w-full">
+<div class="absolute inset-0 z-0">
+<img alt="City Map" class="w-full h-screen object-cover grayscale-[20%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_UeCvJR523LsUfV5BX7O7C-LoUPHLzNn5H55Xbuue6C9GszkheJxOPXnqSEjlgMjOsGrLGD3SBfA6-l0CCK8-AxBpCvk2jIVBGxGWacLYu_PmzQ7q_C51VMkbHZKDkrB89VXVLysfa2Sx9cy19njTebasIkbrqPeX1aPn8eZnhSJxJ4ty0yJuqMyWSrQwX4L3R-LVzOiPosYbfSLymU6xFWyI2YNwJ5EYgiA3xGdetdcdnou9wCpW6vvCqnabtpfJswSSnvcCTkg7"/>
+<!-- Map Markers Simulation -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-24 h-24 rounded-full bg-primary pulse-animation"></div>
+<div class="z-10 bg-primary text-on-primary p-2 rounded-full shadow-lg border-2 border-white">
+<span class="material-symbols-outlined text-[32px]">local_taxi</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Request Overlay / Modal Backdrop -->
+<div class="absolute inset-0 z-[100] flex flex-col justify-end md:justify-center items-center p-gutter bg-black/40 backdrop-blur-[2px] transition-opacity duration-300" id="requestOverlay">
+<!-- Modal Card -->
+<div class="w-full max-w-md bg-surface rounded-[2rem] shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-10 duration-500">
+<!-- Timer & Header Section -->
+<div class="relative p-6 flex flex-col items-center text-center border-b border-outline-variant/30">
+<!-- Countdown Circle -->
+<div class="relative flex items-center justify-center mb-4">
+<svg class="w-24 h-24 countdown-circle">
+<circle class="text-surface-variant" cx="48" cy="48" fill="transparent" r="45" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary timer-path" cx="48" cy="48" fill="transparent" id="timerCircle" r="45" stroke="currentColor" stroke-dasharray="283" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-headline-lg font-bold text-on-surface" id="timerText">15</span>
+</div>
+</div>
+<h2 class="text-headline-md font-bold text-on-surface mb-1">Nouvelle course !</h2>
+<p class="text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] text-primary">near_me</span>
+                    À 500m de vous
+                </p>
+</div>
+<!-- Client Info & Price Bento Grid -->
+<div class="p-6 grid grid-cols-2 gap-3">
+<div class="col-span-2 bg-surface-container-low p-4 rounded-xl flex items-center gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden bg-primary-fixed border-2 border-white shadow-sm">
+<img alt="Amine's Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUr5cDixncrmcL4vHdJEglmSgSta2twLAfSdwEP_TTG7qsljkAtOaHEGrINst5avo9ji8H8OJgK_-3O2BjyxYw68-5PThtuZ6ILeHIFAx8SX4U4XUnHkv6WLX7gMJPpd3Ln9r1AdyqYZlJwfEG9MARd-jnIcfl68t3Lx188bieN8Dc0M33e20Rn0fkCiILMtv7T9UJmT77nv8AgIQ6ewHhpgENBR2Aj4MTwDNWyZPtazVF4CjBGSWIMLMDhOu-A4Dn_aZDYt0vKB4Q"/>
+</div>
+<div>
+<p class="text-label-md text-on-surface-variant mb-0.5">Passager</p>
+<h3 class="text-headline-md font-bold text-on-surface">Amine</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-lg font-bold">4.9</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high/50 p-4 rounded-xl flex flex-col items-center justify-center text-center">
+<p class="text-label-md text-on-surface-variant mb-1">Prix estimé</p>
+<p class="text-headline-md font-bold text-primary">1500 XAF</p>
+</div>
+<div class="bg-surface-container-high/50 p-4 rounded-xl flex flex-col items-center justify-center text-center">
+<p class="text-label-md text-on-surface-variant mb-1">Temps estimé</p>
+<p class="text-headline-md font-bold text-on-surface">12 min</p>
+</div>
+<div class="col-span-2 bg-surface-container-low p-4 rounded-xl">
+<div class="flex items-start gap-3">
+<div class="flex flex-col items-center pt-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<div class="w-0.5 h-6 bg-outline-variant my-1"></div>
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-body-md font-medium text-on-surface truncate">Point de départ • Plateau</p>
+<p class="text-body-md font-bold text-on-surface mt-3 truncate">Destination • Riviera Golf</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="p-6 pt-0 flex flex-col gap-3">
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-bold text-lg flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-transform" id="acceptBtn">
+<span class="material-symbols-outlined">check_circle</span>
+                    Accepter
+                </button>
+<button class="w-full h-14 bg-surface-container-highest text-on-surface-variant rounded-xl font-bold text-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-transform" id="declineBtn">
+<span class="material-symbols-outlined">close</span>
+                    Refuser
+                </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Navigation Drawer -->
+<aside class="fixed inset-y-0 left-0 z-[110] flex flex-col w-80 bg-surface shadow-2xl -translate-x-full transition-transform duration-300 ease-in-out" id="navDrawer">
+<div class="p-6 bg-surface-container flex flex-col items-start gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary">
+<img alt="Alex Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACc81BSK1__1q9k1f8jF-sJtztVVE1Nu9mH4A7gc0QqTns17g-9EqUPFh_l6m7OHkAy1A1NSQ2FvoX5HtvZr2fnD9raYJyU4bZrt8APaeeP8mOksVgAiTT_Ni_wV8OOrVh8Hi0u3MsLGlo_U9krOvdylPap4wYAFD-rdShywo9PK4iuqrr3ImphxsNMAZO3GDF05jdHIhfMs4xccnPj4yJDFAc4vWKBpcaJ81P7M68iutCEIYdPkftYxvb1OhC0-kFZiF3HZDypOQU"/>
+</div>
+<div>
+<h4 class="text-headline-md font-bold text-on-surface">Alex Johnson</h4>
+<p class="text-body-md text-primary font-medium">Premium Member</p>
+<p class="text-label-md text-on-surface-variant">4.98 Rating</p>
+</div>
+</div>
+<nav class="flex-1 py-4">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-md">Ride History</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined">sell</span>
+<span class="font-body-md">Promotions</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-body-md">Support</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-body-md">Safety</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container transition-colors mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<script>
+    // Timer Logic
+    let timeLeft = 15;
+    const timerText = document.getElementById('timerText');
+    const timerCircle = document.getElementById('timerCircle');
+    const totalDash = 283;
+
+    const countdown = setInterval(() => {
+        timeLeft--;
+        timerText.innerText = timeLeft;
+        
+        // Calculate dash offset
+        const offset = totalDash - (timeLeft / 15) * totalDash;
+        timerCircle.style.strokeDashoffset = offset;
+
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            declineRequest();
+        }
+    }, 1000);
+
+    // UI Interactions
+    const acceptBtn = document.getElementById('acceptBtn');
+    const declineBtn = document.getElementById('declineBtn');
+    const overlay = document.getElementById('requestOverlay');
+
+    function declineRequest() {
+        overlay.classList.add('opacity-0');
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            alert('Course refusée');
+        }, 300);
+    }
+
+    acceptBtn.addEventListener('click', () => {
+        clearInterval(countdown);
+        acceptBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Connexion...';
+        setTimeout(() => {
+            overlay.classList.add('opacity-0');
+            setTimeout(() => { overlay.style.display = 'none'; }, 300);
+        }, 1000);
+    });
+
+    declineBtn.addEventListener('click', () => {
+        clearInterval(countdown);
+        declineRequest();
+    });
+
+    // Toggle Drawer logic
+    document.querySelector('header img').parentElement.addEventListener('click', () => {
+        const drawer = document.getElementById('navDrawer');
+        drawer.style.transform = 'translateX(0)';
+    });
+
+    document.addEventListener('click', (e) => {
+        const drawer = document.getElementById('navDrawer');
+        const profileBtn = document.querySelector('header img').parentElement;
+        if (!drawer.contains(e.target) && !profileBtn.contains(e.target)) {
+            drawer.style.transform = 'translateX(-100%)';
+        }
+    });
+</script>
+</body></html>
